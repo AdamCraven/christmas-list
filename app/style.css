@@ -1,8 +1,10 @@
 .box {
 	position: relative;
+	left: 100px;
 	width: 320px;
 	height: 320px;
 	border: solid #000000 2px;
+	margin-bottom: 10px;
 }
 
 img { 
@@ -10,7 +12,15 @@ img {
 	width: 320px;
 }
 
-h1 {
+.header h1 {
+	text-align: center;
+	text-decoration: underline;
+	font-family: 'Brush Script MT', cursive;
+	font-size: 66px;
+	color: #2e0303;
+	}
+
+h2 {
 	position: absolute;
 	top: 60px;
 	left: 0;
@@ -22,7 +32,6 @@ p {
 	top: 95px;
 	left: 0;
 	width: 100px;
-
 }
 
 a {
@@ -31,7 +40,6 @@ a {
 	left: 0;
 	width: 100px;
 	text-decoration: none;
-
 }
 
 .checkbox {
@@ -50,6 +58,17 @@ span {
     padding: 0px 5px 0px 5px; 
 }
 
+.info {
+	position: absolute;
+	top: 80px;
+	left: 340px;
+	background-color: #242121;
+	width: 350px;
+	color: #ffffff;
+	font-family: cursive;
+	font-size: 16px;
+}
+
 body {
-	background-color: #7d7777;
+	background: linear-gradient(to right, #b6c8b6, #34324c);
 }
