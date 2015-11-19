@@ -1,63 +1,94 @@
+.wrapper {
+	display: flex;
+}
+
 .box {
-	position: relative;
+	flex: 1;
 	left: 100px;
-	width: 320px;
-	height: 320px;
+	top: 100px;
+	margin: 0px 0px 20px 0px;	
+	height: 240px;
+	max-width: 240px;
 	border: solid #000000 2px;
-	margin-bottom: 10px;
 }
 
-img { 
-	height: 320px;
-	width: 320px;
+.box1 { 
+	background-image: url(images/fitbit.jpeg);
+	background-size: 240px 240px;
+	background-repeat: no-repeat;
 }
 
-.header h1 {
+.box2 {
+	background-image: url(images/watch.jpg);
+	background-size: 240px 240px;
+	background-repeat: no-repeat;
+}
+
+.box3 {
+	background-image: url(images/shoes.jpg);
+	background-size: 240px 240px;
+	background-repeat: no-repeat;
+}
+
+h1 {
 	text-align: center;
 	text-decoration: underline;
 	font-family: 'Brush Script MT', cursive;
 	font-size: 66px;
-	color: #2e0303;
-	}
-
-h2 {
-	position: absolute;
-	top: 60px;
-	left: 0;
-	width: 200px;
+	color: #000000;
 }
 
-p {
+h2 {
+	font-size: 45px;
+	font-family: 'Brush Script MT', cursive;
+	color: #000000;
+	text-decoration: underline;
+
+}
+
+h3 { 
 	position: absolute;
-	top: 95px;
-	left: 0;
-	width: 100px;
+	margin-top: 30px;
+}	
+
+.price {
+	position: absolute;
+	margin-top: 60px;
 }
 
 a {
 	position: absolute;
-	top: 260px;
-	left: 0;
-	width: 100px;
+	margin-top: 200px;
 	text-decoration: none;
 }
 
-.check {
-	position: absolute;
-	top: 150px;
-	left: 340px;
-	background-color: #242121;
-	width: 300px;
-	font-family: cursive;
-	font-size: 18px;
-	color: #ffffff;
+.description {
+	position: flex;
+	width: 240px;
+	height: 160px;
+	text-align: center;
+	opacity: 0;
+	line-height: 180px;
+	color: #000000;
+	font-size: 30px;
 }
 
-.checkbox {
-	position: absolute;
-	top: 200px;
-	left: 600px;
-	width: 100px;
+.description:hover {
+	opacity: 1;
+}
+
+.reduce {
+	opacity: 0.5;
+}
+
+.tbg {
+	background-color: #8e7f7f;
+	background-size: 75px 200px;
+	opacity: 0;
+}
+
+.tbg:hover {
+	opacity: .75;
 }
 
 span {
@@ -67,24 +98,6 @@ span {
     background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.7);
     padding: 0px 5px 0px 5px; 
-}
-
-.info {
-	position: absolute;
-	top: 100px;
-	left: 340px;
-	background-color: #242121;
-	width: 180px;
-	color: #ffffff;
-	font-family: cursive;
-	font-size: 16px;
-}
-
-.name {
-	font-size: 20px;
-	font-family: cursive;
-	color: #04c7f8;
-	float: right;
 }
 
 body {
