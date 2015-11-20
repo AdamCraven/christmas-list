@@ -1,32 +1,30 @@
 $(document).ready(function(){
 	
-	$(".box1").hover(
-		function() {
-			$(".box1").addClass("reduce").addClass("tbg");
-		},
-		function() {
-			$(".box1").removeClass("reduce").addClass("tbg");
+	$('#c1').change(function() {
+		if($(this).is(':checked')) {
+			$(".box1").addClass("reduce");
+		} else {
+			$(".box1").removeClass("reduce");
 		}
-		);
+	});
 		
-	$(".box2").hover(
-		function() {
+	$('#c2').change(function() {
+		if($(this).is(':checked')) {
 			$(".box2").addClass("reduce");
-		},
-		function() {
+		} else {
 			$(".box2").removeClass("reduce");
 		}
-		);
-		
-	$(".box3").hover(
-		function() {
+	});
+	
+	$('#c3').change(function() {
+		if($(this).is(':checked')) {
 			$(".box3").addClass("reduce");
-		},
-		function() {
+		} else {
 			$(".box3").removeClass("reduce");
 		}
-		);
-	
+	});
+
+
 	
 
 
