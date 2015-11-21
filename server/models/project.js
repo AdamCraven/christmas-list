@@ -20,14 +20,17 @@ var Project = Waterline.Collection.extend({
       defaultsTo: 'Empty project'
     },
     price: {
-      type: 'string',
+      type: 'float',
     },
     description: {
       type: 'string',
     },
     purchased: {
       type: 'boolean',
-    }
+    },
+    backgroundImage: {
+      type: 'string',
+    },
   }
 });
 
