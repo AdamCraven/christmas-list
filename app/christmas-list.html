@@ -4,6 +4,7 @@
   <meta charset="utf-8" />
   <title>Christmas List</title>
   <script src="../node_modules/jquery/dist/jquery.js"></script>
+  <script src="../node_modules/handlebars/dist/handlebars.js"></script>
   <script type="text/javascript" src="script.js"></script>
   <link rel="stylesheet" href="style.css">
 
@@ -44,8 +45,19 @@
 			<input type="checkbox" id="c3"/>
 		</div>
 
-	</div>
 
+
+	</div>
+<script id="hbs-project-template" type="text/x-handlebars-template">
+		<div class="box box1">
+			<h3><span>{{name}}</span></h3>
+			<p class="price"><span>{{price}}</span></p>
+			<a href="#"><span>Link</span></a>
+			<p class="description">{{description}}</p>
+			<p><span class="purch">Purchased?</span></p>
+			<input type="checkbox" id="c1"/>
+		</div>
+</script>
 
 
 

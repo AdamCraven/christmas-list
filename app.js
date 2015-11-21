@@ -8,6 +8,7 @@ var express = require('express'),
     Waterline = require('waterline'),
     bodyParser = require('body-parser'),
     methodOverride = require('method-override');
+var waterlineFixtures = require('waterline-fixtures');
 
 var orm = new Waterline();
 
@@ -36,7 +37,17 @@ var config = {
   },
   defaults: {
     migrate: 'alter'
-  }
+  },
+  fixtures: [
+    {
+        model: 'projects',
+        items: [
+            { name: 'Guinness' },
+            { name: 'Sully' },
+            { name: 'Ren' }
+        ]
+    }
+],
 };
 
 
@@ -55,6 +66,11 @@ orm.loadCollection(Project);
 // Setup Express Application
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "X-Requested-With");
+  next();
+});
 app.use(methodOverride());
 
 // Build Express Routes (CRUD routes for /Projects)
@@ -108,8 +124,21 @@ orm.initialize(config, function(err, models) {
   app.models = models.collections;
   app.connections = models.connections;
 
-  // Start Server
-  app.listen(5050);
+    // Load fixtures
+  waterlineFixtures.init({
+    collections: models.collections,
+    fixtures: [{
+        model:"project",
+        items: [
+            { name: 'Guinness' },
+            { name: 'Sully' },
+            { name: 'Ren' }
+        ]
+    }]
+  }, function doThisAfterFixturesAreLoaded(err) {
+      // Start Server
+      app.listen(5050);
+      console.log("To see saved Projects, visit http://localhost:3000/Projects");
+  });
 
-  console.log("To see saved Projects, visit http://localhost:3000/Projects");
 });
