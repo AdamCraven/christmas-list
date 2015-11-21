@@ -4,7 +4,7 @@
   "description": "Christmas list for the family",
   "main": "app.js",
   "dependencies": {
-    "normalize.css": "^3.0.3"
+    "normalize.css": "^3.0.3",
     "body-parser": "^1.14.1",
     "express": "^4.13.3",
     "handlebars": "^4.0.5",
