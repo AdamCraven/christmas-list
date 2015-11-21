@@ -5,6 +5,7 @@
   <title>Christmas List</title>
   <script src="../node_modules/jquery/dist/jquery.js"></script>
   <script type="text/javascript" src="script.js"></script>
+  <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css">
   <link rel="stylesheet" href="style.css">
 
 </head>
@@ -18,30 +19,45 @@
 	<div class="wrapper">
 		
 		<div class="box box1">
-			<h3><span>FitBit</span></h3>
-			<p class="price"><span>£99</span></p>
-			<a href="#"><span>Link</span></a>
-			<p class="description">This is a FitBit....</p>
-			<p><span class="purch">Purchased?</span></p>
-			<input type="checkbox" id="c1"/>
+			<h3 class="title">FitBit</h3>
+			<p class="price">£99</p>
+			<div class="description">
+				<p>This is a FitBit... Adam is making me write this. This is going to be filled with pointless words and sentences just for the hell of it.</p>
+			</div>
+			<div class="footer">
+				<a href="#" class="link">Link</a>
+				<label class="purch">Purchased?
+					<input type="checkbox" class="checkbox" id="c1"/>
+				</label>
+			</div>
 		</div>
 
 		<div class="box box2">
-			<h3><span>Watch</span></h3>
-			<p class="price"><span>£1255</span></p>
-			<a href="#"><span>Link</span></a>
-			<p class="description">This is a watch....</p>			
-			<p><span class="purch">Purchased?</span></p>
-			<input type="checkbox" id="c2"/>
+			<h3 class="title">Watch</h3>
+			<p class="price">£1255</p>
+			<div class="description">
+				<p>This is a watch....</p>
+			</div>
+			<div class="footer">			
+				<a href="#" class="link">Link</a>
+				<label class="purch">Purchased?
+					<input type="checkbox" class="checkbox" id="c2"/>
+				</label>
+			</div>
 		</div>
 	
 		<div class="box box3">
-			<h3><span>Shoes</span></h3>
-			<p class="price"><span>£20</span></p>
-			<a href="#"><span>Link</span></a>
-			<p class="description">Size 9</p>
-			<p><span class="purch">Purchased?</span></p>
-			<input type="checkbox" id="c3"/>
+			<h3 class="title">Shoes</h3>
+			<p class="price">£20</p>
+			<div class="description">
+				<p>Size 9</p>
+			</div>
+			<div class="footer">
+				<a href="#" class="link">Link</a>
+				<label class="purch">Purchased?
+					<input type="checkbox" class="checkbox" id="c3"/>
+				</label>
+			</div>
 		</div>
 		
 	</div>	
