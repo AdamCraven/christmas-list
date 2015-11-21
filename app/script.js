@@ -1,5 +1,3 @@
-$(document).ready(function(){
-
 	$('#c1').change(function() {
 		if($(this).is(':checked')) {
 			$(".box1").addClass("reduce");
@@ -37,5 +35,3 @@ $(document).ready(function(){
 	});
 
 
-
-});

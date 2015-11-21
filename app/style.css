@@ -134,3 +134,7 @@ p {
 body {
 	background: linear-gradient(to right, #b6c8b6, #34324c);
 }
+
+input[type=text] {
+	border: 2px solid black;
+}
