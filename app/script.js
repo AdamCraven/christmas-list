@@ -26,7 +26,6 @@ $(document).ready(function(){
 
 
 	$.get('//localhost:5050/projects/',function (projects) {
-		//debugger;
 		var source   = $("#hbs-project-template").html();
 		var template = Handlebars.compile(source);
 
@@ -35,9 +34,6 @@ $(document).ready(function(){
 		});
 
 		$('.wrapper').append(projectListHTML);
-
-
-
 	});
 
 

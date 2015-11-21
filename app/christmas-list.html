@@ -39,7 +39,7 @@
 			<div class="description">
 				<p>This is a watch....</p>
 			</div>
-			<div class="footer">			
+			<div class="footer">
 				<a href="#" class="link">Link</a>
 				<label class="purch">Purchased?
 					<input type="checkbox" class="checkbox" id="c2"/>
@@ -60,19 +60,22 @@
 				</label>
 			</div>
 		</div>
-
-
-
 	</div>
+
 <script id="hbs-project-template" type="text/x-handlebars-template">
-		<div class="box box1">
-			<h3><span>{{name}}</span></h3>
-			<p class="price"><span>{{price}}</span></p>
-			<a href="#"><span>Link</span></a>
-			<p class="description">{{description}}</p>
-			<p><span class="purch">Purchased?</span></p>
-			<input type="checkbox" id="c1"/>
+	<div class="box box1">
+		<h3 class="title">{{name}}</h3>
+		<p class="price">{{price}}</p>
+		<div class="description">
+			<p>{{description}}</p>
 		</div>
+		<div class="footer">
+			<a href="{{link}}" class="link">Link</a>
+			<label class="purch">Purchased?
+				<input type="checkbox" class="checkbox" id="c1"/>
+			</label>
+		</div>
+	</div>
 </script>
 
 
