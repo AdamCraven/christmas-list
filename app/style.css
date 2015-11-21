@@ -7,7 +7,6 @@
 .box {
 	flex: 1;
 	-webkit-flex: 1;
-	margin: 0px 0px 20px 0px;	
 	height: 240px;
 	max-width: 260px;
 	min-width: 220px;
@@ -21,13 +20,12 @@
 	z-index: 0;
 }
 
-.box1 { 
+.box1 {
 	background-image: url(images/fitbit.jpeg);
 }
 
 .box2 {
 	background-image: url(images/watch.jpg);
-
 }
 
 .box3 {
@@ -119,9 +117,8 @@ h2 {
 	color: white; 
 	font: bold 24px/45px Helvetica, Sans-Serif; 
 	letter-spacing: -1px;  
-    background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.7);
-    padding: 0px 5px 0px 5px; 
+    padding: 0px 5px 0px 5px;
 }
 
 .checkbox {
