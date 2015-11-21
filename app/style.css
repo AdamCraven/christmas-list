@@ -73,14 +73,14 @@ a {
 }
 
 .purch {
-	position: flex;
-	margin-top: 10px;
+	position: absolute;
+	margin-top: -25px;
 	color: white; 
 	font: bold 24px/45px Helvetica, Sans-Serif; 
 	letter-spacing: -1px;  
     background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.7);
-    padding: 0px 5px 0px 5px;
+    padding: 0px 35px 0px 5px;
 }
 
 .description:hover {
@@ -89,16 +89,6 @@ a {
 
 .reduce {
 	opacity: 0.5;
-}
-
-.tbg {
-	background-color: #8e7f7f;
-	background-size: 75px 200px;
-	opacity: 0;
-}
-
-.tbg:hover {
-	opacity: .75;
 }
 
 span {
@@ -117,6 +107,9 @@ input[type=checkbox] {
   -webkit-transform: scale(2); /* Safari and Chrome */
   -o-transform: scale(2); /* Opera */
   padding: 10px;
+  position: absolute;
+  margin-top: -10px;
+  margin-left: 145px;
 }
 
 body {
