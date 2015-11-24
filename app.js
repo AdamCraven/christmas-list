@@ -38,7 +38,7 @@ var config = {
   defaults: {
     migrate: 'alter'
   },
-  fixtures: [
+ /* fixtures: [
     {
         model: 'projects',
         items: [
@@ -47,7 +47,7 @@ var config = {
             { name: 'Ren' }
         ]
     }
-],
+  ],*/
 };
 
 
@@ -63,6 +63,11 @@ orm.loadCollection(Project);
 // EXPRESS SETUP
 
 
+var busboy = require('connect-busboy'); //middleware for form/file upload
+var path = require('path');     //used for file path
+var fs = require('fs-extra');       //File System - for file manipulation
+
+
 // Setup Express Application
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -71,6 +76,7 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
+app.use(busboy());
 app.use(methodOverride());
 
 // Build Express Routes (CRUD routes for /Projects)
@@ -82,7 +88,36 @@ app.get('/projects', function(req, res) {
   });
 });
 
+
+app.post('/upload', function (req, res, next) {
+    var fstream;
+    req.pipe(req.busboy);
+
+    //read https://www.npmjs.com/package/busboy
+    req.busboy.on('field', function (fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+      console.log('Field [' + fieldname + ']: value: ' + val);
+    });
+    req.busboy.on('file', function (fieldname, file, filename) {
+        console.log("Uploading: " + filename);
+
+        //Path where image will be uploaded
+        fstream = fs.createOutputStream(__dirname + '/uploads/img/' + filename);
+        file.pipe(fstream);
+        fstream.on('close', function () {
+          app.models.project.create(req.body, function(err, model) {
+            if(err) return res.json({ err: err }, 500);
+           // debugger;
+            console.log('MODEL', model);
+            console.log("Upload Finished of " + filename);
+            res.redirect('back');           //where to go next
+
+          });
+        });
+    });
+});
+
 app.post('/projects', function(req, res) {
+  console.log('here', req.body);
   app.models.project.create(req.body, function(err, model) {
     if(err) return res.json({ err: err }, 500);
     res.json(model);
@@ -127,14 +162,7 @@ orm.initialize(config, function(err, models) {
     // Load fixtures
   waterlineFixtures.init({
     collections: models.collections,
-    fixtures: [{
-        model:"project",
-        items: [
-            { name: 'Guinness' },
-            { name: 'Sully' },
-            { name: 'Ren' }
-        ]
-    }]
+
   }, function doThisAfterFixturesAreLoaded(err) {
       // Start Server
       app.listen(5050);
