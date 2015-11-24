@@ -1,6 +1,6 @@
 $('form').submit(function(e) {
-    e.preventDefault();
+    //e.preventDefault();
     var data = $(this).serialize();
 
-    $.post('//localhost:5050/projects/', data, function() {});
+    //$.post('//localhost:5050/projects/', data, function() {});
 });
