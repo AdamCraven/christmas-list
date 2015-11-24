@@ -8,11 +8,11 @@
    </style>
 </head>
 <body>
-	<form>
+	<form enctype="multipart/form-data" method="post" action="http://localhost:5050/upload" onsubmit="return;">
 		<input type="text" name="name" placeholder="title">
 		<input type="text" name="description" placeholder="description">
 		<input type="number" name="price" placeholder="price">
-		<input type="text" name="backgroundImage" placeholder="background image">
+		<input type="file" name="backgroundImage" placeholder="background image">
 		<input type="text" name="link" placeholder="link">
 		<select name="owner">
 			<option value="adam">Adam</option>
