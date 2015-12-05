@@ -21,6 +21,7 @@ var Project = Waterline.Collection.extend({
     },
     price: {
       type: 'float',
+      required:true
     },
     description: {
       type: 'string',
@@ -28,8 +29,9 @@ var Project = Waterline.Collection.extend({
     purchased: {
       type: 'boolean',
     },
-    backgroundImage: {
+    image: {
       type: 'string',
+      required:true
     },
   }
 });

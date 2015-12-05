@@ -23,7 +23,7 @@
 	});
 
 
-	$.get('//localhost:5050/projects/',function (projects) {
+	$.get('/projects/',function (projects) {
 		var source   = $("#hbs-project-template").html();
 		var template = Handlebars.compile(source);
 

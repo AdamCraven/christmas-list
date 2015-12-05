@@ -97,7 +97,7 @@ app.get(/^(.+[js|css|html])$/, function(req, res) {
   res.sendFile('app/' + req.params[0], {root: __dirname});
 });
 
-app.get('/cdn', function(req,res) {
+app.get(/cdn\/(.+)$/, function(req,res) {
   res.sendFile('uploads/img/' + req.params[0], {root: __dirname});
 });
 
@@ -111,31 +111,70 @@ app.get('/projects', function(req, res) {
   });
 });
 
-app.post('/upload', function (req, res, next) {
-    var fstream;
-    req.pipe(req.busboy);
+app.post('/upload', function(req, res, next) {
+  var modelObj = {};
+  var fstream;
+  req.pipe(req.busboy);
 
-    //read https://www.npmjs.com/package/busboy
-    req.busboy.on('field', function (fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
-      console.log('Field [' + fieldname + ']: value: ' + val);
+  //read https://www.npmjs.com/package/busboy
+  req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+    console.log('[' + fieldname + ']:' + val);
+    modelObj[fieldname] = val;
+  });
+
+  req.busboy.on('file', function(fieldname, file, filename) {
+    if (!filename) {
+      return true;
+    }
+    console.log("Uploading: " + filename);
+
+    modelObj.image = filename;
+    file.pipe(fs.createOutputStream(__dirname + '/uploads/img/' + filename));
+  });
+
+  req.busboy.on('finish', function() {
+    app.models.project.create(modelObj, function(err, model) {
+      console.log('REQ.body', modelObj);
+      console.log('MODEL', model);
+      if (err) {
+        return res.json({err: err }, 500);
+      }
+      res.redirect('back'); //where to go next
     });
-    req.busboy.on('file', function (fieldname, file, filename) {
-        console.log("Uploading: " + filename);
+  });
+});
 
-        //Path where image will be uploaded
-        fstream = fs.createOutputStream(__dirname + '/uploads/img/' + filename);
-        file.pipe(fstream);
-        fstream.on('close', function () {
-          app.models.project.create(req.body, function(err, model) {
-            if(err) return res.json({ err: err }, 500);
-           // debugger;
-            console.log('MODEL', model);
-            console.log("Upload Finished of " + filename);
-            res.redirect('back');           //where to go next
+app.post('/upload/:id', function(req, res, next) {
+  var modelObj = {};
+  var fstream;
+  req.pipe(req.busboy);
 
-          });
-        });
+  //read https://www.npmjs.com/package/busboy
+  req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+    console.log('[' + fieldname + ']:' + val);
+    modelObj[fieldname] = val;
+  });
+
+  req.busboy.on('file', function(fieldname, file, filename) {
+    if (!filename) {
+      return true;
+    }
+    console.log("Uploading: " + filename);
+
+    modelObj.image = filename;
+    file.pipe(fs.createOutputStream(__dirname + '/uploads/img/' + filename));
+  });
+
+  req.busboy.on('finish', function() {
+    app.models.project.update(modelObj.id, modelObj, function(err, model) {
+      console.log('REQ.body', modelObj);
+      console.log('MODEL', model);
+      if (err) {
+        return res.json({err: err }, 500);
+      }
+      res.redirect('back'); //where to go next
     });
+  });
 });
 
 app.post('/projects', function(req, res) {

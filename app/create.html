@@ -8,12 +8,12 @@
    </style>
 </head>
 <body>
-	<form enctype="multipart/form-data" method="post" action="http://localhost:5050/upload" onsubmit="return;">
-		<input type="text" name="name" placeholder="title">
-		<input type="text" name="description" placeholder="description">
-		<input type="number" name="price" placeholder="price">
-		<input type="file" name="backgroundImage" placeholder="background image">
-		<input type="text" name="link" placeholder="link">
+	<form enctype="multipart/form-data" method="post" >
+		<input value="" requireds type="text" name="name" placeholder="title">
+		<input value="" type="text" name="description" placeholder="description">
+		<input value="" requireds type="number" name="price" placeholder="price">
+		<input value="" requireds type="file" name="backgroundImage" placeholder="background image">
+		<input value="" requireds type="text" name="link" placeholder="link">
 		<select name="owner">
 			<option value="adam">Adam</option>
 			<option value="andrew">Andrew</option>
@@ -21,6 +21,32 @@
 		<input type="submit">
 	</form>
 
-    <script src="./submit.js"></script>
+  <div class="wrapper">
+
+  </div>
+
+  <script id="hbs-project-template" type="text/x-handlebars-template">
+  <form enctype="multipart/form-data" id={{id}} >
+    <input value="{{name}}" required type="text" name="name" placeholder="title">
+    <input value="{{description}}" type="text" name="description" placeholder="description">
+    <input value="{{price}}" required type="number" name="price" placeholder="price">
+    <input value="{{image}}" required type="file" name="backgroundImage" placeholder="background image">
+    <input value="{{link}}" required type="text" name="link" placeholder="link">
+    <label class="purch">Purchased?
+      <input type="checkbox" class="checkbox" id="c1" >
+    </label>
+    <select name="owner">
+      <option value="adam">Adam</option>
+      <option value="andrew">Andrew</option>
+    </select>
+
+    <button class="update">update</button>
+    <button class="delete">delete</button>
+  </form>
+  </script>
+  <script src="../node_modules/jquery/dist/jquery.js"></script>
+  <script src="../node_modules/handlebars/dist/handlebars.js"></script>
+  <script src="submit.js"></script>
+
 </body>
 </html>
