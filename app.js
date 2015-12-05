@@ -81,13 +81,35 @@ app.use(methodOverride());
 
 // Build Express Routes (CRUD routes for /Projects)
 
+
+/**
+ * Web server routes
+ */
+app.get('/', function(req,res) {
+  res.sendFile('app/index.html',{ root: __dirname });
+});
+
+app.get(/node_modules\/(.+)$/, function(req, res) {
+  console.log(req.params[0]);
+  res.sendFile('/node_modules/' + req.params[0], { root: __dirname });
+});
+app.get(/^(.+[js|css|html])$/, function(req, res) {
+  res.sendFile('app/' + req.params[0], {root: __dirname});
+});
+
+app.get('/cdn', function(req,res) {
+  res.sendFile('uploads/img/' + req.params[0], {root: __dirname});
+});
+
+/**
+ * Application server routes
+ */
 app.get('/projects', function(req, res) {
   app.models.project.find().exec(function(err, models) {
     if(err) return res.json({ err: err }, 500);
     res.json(models);
   });
 });
-
 
 app.post('/upload', function (req, res, next) {
     var fstream;
@@ -117,7 +139,6 @@ app.post('/upload', function (req, res, next) {
 });
 
 app.post('/projects', function(req, res) {
-  console.log('here', req.body);
   app.models.project.create(req.body, function(err, model) {
     if(err) return res.json({ err: err }, 500);
     res.json(model);
