@@ -1,11 +1,7 @@
-.wrapper {
-	display: flex;
-	flex-flow: row wrap;
-	-webkit-flex-flow: row wrap;
-}
+@import "./pages/_edit";
 
 .box {
-	flex: 1;
+	flex: 12;
 	-webkit-flex: 1;
 	height: 240px;
 	max-width: 260px;
@@ -16,8 +12,8 @@
 	background-size: cover;
 	margin: 5px 10px 5px 10px;
 	position: relative;
-	flex-basis: 240px;
-	z-index: 0;
+	flex-basis: 230px;
+	z-index: 1;
 
 	.box1 {
 	background-image: url(images/fitbit.jpeg);
@@ -30,7 +26,7 @@
 	.box3 {
 		background-image: url(images/shoes.jpg);
 	}
-	
+
 	h1 {
 		text-align: center;
 		text-decoration: underline;
@@ -50,14 +46,14 @@
 	.title {
 		display: inline-block;
 		top: 0;
-		color: white; 
-		font: bold 24px/45px Helvetica, Sans-Serif; 
-		letter-spacing: -1px;  
+		color: white;
+		font: bold 24px/45px Helvetica, Sans-Serif;
+		letter-spacing: -1px;
 	    background: rgb(0, 0, 0);
 	    background: rgba(0, 0, 0, 0.7);
-	    padding: 0px 5px 0px 5px; 
+	    padding: 0px 5px 0px 5px;
 	    margin: 0;
-	}	
+	}
 
 	.price {
 		position: absolute;
@@ -69,7 +65,7 @@
 		padding: 3px 10px 2px 10px;
 		border-left: 2px solid #000000;
 		border-bottom: 2px solid #000000;
-		border-bottom-left-radius: 25px;	
+		border-bottom-left-radius: 25px;
 		margin:0;
 	}
 
@@ -100,7 +96,7 @@
 	.purch {
 		display: inline-block;
 		position: absolute;
-		margin-right: 2px; 
+		margin-right: 2px;
 		right: 20px;
 	}
 
@@ -113,9 +109,9 @@
 		bottom: 0;
 		left: 0;
 		right: 0;
-		color: white; 
-		font: bold 24px/45px Helvetica, Sans-Serif; 
-		letter-spacing: -1px;  
+		color: white;
+		font: bold 24px/45px Helvetica, Sans-Serif;
+		letter-spacing: -1px;
 	    background: rgba(0, 0, 0, 0.7);
 	    padding: 0px 5px 0px 5px;
 	}
@@ -133,13 +129,15 @@
 	input[type=text] {
 		border: 2px solid black;
 	}
-
 }
-
 
 
 body {
 	background: linear-gradient(to right, #b6c8b6, #34324c);
 }
 
+
+form {
+
+}
 
