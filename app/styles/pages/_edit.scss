@@ -4,11 +4,13 @@ body.edit {
 
   form {
     margin: 10px 1px;
+    border:1px solid black;
+    padding: 15px;
   }
 
   input {
-    float: right;
     clear: left;
-    width: 100%;
+    width: 95%;
+    margin-bottom: 10px;
   }
 }

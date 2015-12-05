@@ -10,7 +10,6 @@ $.get('/projects/', function(projects) {
 });
 
 
-
 function remove(e) {
   e.preventDefault();
   var $form = $(e.target).parent('form');
@@ -31,34 +30,26 @@ function remove(e) {
 
 function submit(e) {
   e.preventDefault();
-
   var $form = $(e.target).parent('form');
-  var id = $form[0].id;
-  var ye = new FormData($form[0]);
-
+  var id = $form.find('input[name="id"]').val();
   var url = (id) ? 'upload/' + id : '/upload';
 
 
   $.ajax({
-      url: url,
-      data: ye,
-      processData: false,
-      contentType: false,
-      type: 'POST',
-      success: function(data) {
-        alert(data);
-      },
-      error: function(data) {
-        alert(JSON.stringify(data));
-      }
-    });
-    //debugger;
+    url: url,
+    data: new FormData($form[0]),
+    processData: false,
+    contentType: false,
+    type: 'POST',
+    success: function(data) {
+      alert(JSON.stringify(data));
+    },
+    error: function(data) {
+      alert(JSON.stringify(data));
+    }
+  });
+}
 
-    //$.post('//localhost:5050/projects/', data, function() {});
-  }
-
-      $(document).on('click', 'button.delete', remove);
-    $(document).on('click', 'button.update', submit);
-
-    $('form').submit(submit);
-
+$(document).on('click', 'button.delete', remove);
+$(document).on('click', 'button.update', submit);
+$(document).on('click', 'input.create', submit);

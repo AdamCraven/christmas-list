@@ -13,11 +13,14 @@
 		<input value="" requireds type="number" name="price" placeholder="price">
 		<input value="" requireds type="file" name="backgroundImage" placeholder="background image">
 		<input value="" requireds type="text" name="link" placeholder="link">
+    <label class="purch">Purchased?
+      <input type="checkbox" name="purchased" >
+    </label>
 		<select name="owner">
 			<option value="adam">Adam</option>
 			<option value="andrew">Andrew</option>
 		</select>
-		<input type="submit">
+		<input type="submit" class="create">
 	</form>
 
   <div class="wrapper">
@@ -26,13 +29,15 @@
 
   <script id="hbs-project-template" type="text/x-handlebars-template">
   <form enctype="multipart/form-data" id={{id}} >
+  <h1>{{purchased}} - ee</h1>
+    <input type="hidden" name="id" value="{{id}}">
     <input value="{{name}}" required type="text" name="name" placeholder="title">
     <input value="{{description}}" type="text" name="description" placeholder="description">
     <input value="{{price}}" required type="number" name="price" placeholder="price">
     <input value="{{image}}" required type="file" name="backgroundImage" placeholder="background image">
     <input value="{{link}}" required type="text" name="link" placeholder="link">
     <label class="purch">Purchased?
-      <input type="checkbox" class="checkbox" id="c1" >
+      <input type="checkbox" name="purchased" {{#if purchased}}checked{{/if}} >
     </label>
     <select name="owner">
       <option value="adam">Adam</option>

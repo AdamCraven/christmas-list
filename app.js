@@ -111,7 +111,11 @@ app.get('/projects', function(req, res) {
   });
 });
 
-app.post('/upload', function(req, res, next) {
+app.post('/upload', createOrUpdate.bind(null, true));
+
+
+
+function createOrUpdate(isNew, req, res, next) {
   var modelObj = {};
   var fstream;
   req.pipe(req.busboy);
@@ -119,6 +123,14 @@ app.post('/upload', function(req, res, next) {
   //read https://www.npmjs.com/package/busboy
   req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
     console.log('[' + fieldname + ']:' + val);
+    if(fieldname === 'purchased') {
+      if (val === 'on') {
+        val = true;
+      }
+      else {
+        val = false;
+      }
+    }
     modelObj[fieldname] = val;
   });
 
@@ -128,54 +140,59 @@ app.post('/upload', function(req, res, next) {
     }
     console.log("Uploading: " + filename);
 
-    modelObj.image = filename;
-    file.pipe(fs.createOutputStream(__dirname + '/uploads/img/' + filename));
+    var sanitizedFilename = filename.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+    modelObj.image = sanitizedFilename;
+    file.pipe(fs.createOutputStream(__dirname + '/uploads/img/' + sanitizedFilename));
   });
 
   req.busboy.on('finish', function() {
-    app.models.project.create(modelObj, function(err, model) {
-      console.log('REQ.body', modelObj);
-      console.log('MODEL', model);
-      if (err) {
-        return res.json({err: err }, 500);
-      }
-      res.redirect('back'); //where to go next
-    });
-  });
-});
-
-app.post('/upload/:id', function(req, res, next) {
-  var modelObj = {};
-  var fstream;
-  req.pipe(req.busboy);
-
-  //read https://www.npmjs.com/package/busboy
-  req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
-    console.log('[' + fieldname + ']:' + val);
-    modelObj[fieldname] = val;
-  });
-
-  req.busboy.on('file', function(fieldname, file, filename) {
-    if (!filename) {
-      return true;
+    if (isNew) {
+      app.models.project.create(modelObj, function(err, model) {
+        console.log('REQ.body', modelObj);
+        console.log('MODEL', model);
+        if (err) {
+          return res.json({
+            err: err
+          }, 500);
+        }
+        res.json({
+          success: true
+        }); //where to go next
+      });
+    } else {
+      app.models.project.update(modelObj.id, modelObj, function(err, model) {
+        console.log('REQ.body', modelObj);
+        console.log('MODEL', model);
+        if (err) {
+          return res.json({
+            err: err
+          }, 500);
+        }
+        res.json({
+          success: true
+        }); //where to go next
+      });
     }
-    console.log("Uploading: " + filename);
-
-    modelObj.image = filename;
-    file.pipe(fs.createOutputStream(__dirname + '/uploads/img/' + filename));
   });
 
-  req.busboy.on('finish', function() {
-    app.models.project.update(modelObj.id, modelObj, function(err, model) {
-      console.log('REQ.body', modelObj);
-      console.log('MODEL', model);
-      if (err) {
-        return res.json({err: err }, 500);
-      }
-      res.redirect('back'); //where to go next
-    });
+}
+
+
+
+app.post('/upload/:id', createOrUpdate.bind(null, false));
+app.post('/purchased/:id', function(req, res) {
+  if(!req.body.id) {
+    res.json({success:false});
+  }
+
+  var isChecked = (req.body.purchased === 'on') ? true : false;
+  app.models.project.update(req.body.id, {purchased: isChecked}, function(err, model) {
+    if(err) return res.json({ err: err }, 500);
+    res.json(model);
   });
 });
+
 
 app.post('/projects', function(req, res) {
   app.models.project.create(req.body, function(err, model) {

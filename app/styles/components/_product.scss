@@ -1,6 +1,5 @@
 .product {
   flex: 1;
-  -webkit-flex: 1;
   height: 240px;
   max-width: 260px;
   min-width: 220px;
@@ -20,7 +19,6 @@
     font-size: 66px;
     color: #000000;
   }
-
   h2 {
     font-size: 45px;
     font-family: 'Brush Script MT', cursive;
@@ -28,19 +26,16 @@
     text-decoration: underline;
     margin-left: 20px;
   }
-
   .title {
     display: inline-block;
     top: 0;
     color: white;
     font: bold 24px/45px Helvetica, Sans-Serif;
     letter-spacing: -1px;
-      background: rgb(0, 0, 0);
-      background: rgba(0, 0, 0, 0.7);
-      padding: 0px 5px 0px 5px;
-      margin: 0;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0px 5px 0px 5px;
+    margin: 0;
   }
-
   .price {
     position: absolute;
     top: 0;
@@ -52,16 +47,14 @@
     border-left: 2px solid #000000;
     border-bottom: 2px solid #000000;
     border-bottom-left-radius: 25px;
-    margin:0;
+    margin: 0;
   }
-
   .link {
     display: inline-block;
     bottom: 0;
     text-decoration: none;
     color: #ffffff;
   }
-
   .description {
     position: absolute;
     top: 0;
@@ -71,25 +64,21 @@
     opacity: 0;
     padding: 50px 15px 50px 15px;
     color: #ffffff;
-    background-color:rgba(0,0,0,0.5);
+    background-color: rgba(0, 0, 0, 0.5);
     z-index: -1;
   }
-
   .description:hover {
     opacity: 1;
   }
-
   .purch {
     display: inline-block;
     position: absolute;
     margin-right: 2px;
     right: 20px;
   }
-
-  .reduce {
+  &.reduce {
     opacity: 0.5;
   }
-
   .footer {
     position: absolute;
     bottom: 0;
@@ -98,20 +87,17 @@
     color: white;
     font: bold 24px/45px Helvetica, Sans-Serif;
     letter-spacing: -1px;
-      background: rgba(0, 0, 0, 0.7);
-      padding: 0px 5px 0px 5px;
+    background: rgba(0, 0, 0, 0.7);
+    padding: 0px 5px 0px 5px;
   }
-
   .checkbox {
     position: relative;
     bottom: 3px;
     right: -10px;
   }
-
   p {
     margin: 0;
   }
-
   input[type=text] {
     border: 2px solid black;
   }
