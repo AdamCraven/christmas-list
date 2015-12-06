@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Christmas List</title>
+  <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css">
+  <link rel="stylesheet" href="styles/main.css">
+
+</head>
+<body class="home">
+	<div class="header">
+		<h1><span class="name"></span>'s  Christmas Wish List</h1>
+	</div>
+
+
+	<div class="wrapper">
+  <script id="hbs-project-template" type="text/x-handlebars-template">
+  	<div class="product {{#if purchased}}reduce{{/if}}" style="background-image:url('/cdn/{{image}}')">
+  		<a href="{{link}}" target="_blank">
+      <h3 class="title">{{name}}</h3>
+  		<p class="price">£{{price}}</p>
+  		<div class="description">
+  			<p>{{description}}</p>
+  		</div>
+      </a>
+  		<div class="footer">
+  			<label class="purch">Purchased?
+  				<input type="checkbox" class="checkbox" data-id="{{id}}" {{#if purchased}}checked{{/if}} />
+  			</label>
+  		</div>
+  	</div>
+  </script>
+  <script src="../node_modules/jquery/dist/jquery.js"></script>
+  <script src="../node_modules/handlebars/dist/handlebars.js"></script>
+  <script type="text/javascript" src="script.js"></script>
+
+</body>
+</html>

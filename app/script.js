@@ -1,29 +1,30 @@
-	$('#c1').change(function() {
+
+
+function updatePurchased(id, isPurchased) {
+  $.ajax({
+    url: '/purchased/'+ id,
+    data: {purchased: isPurchased, id: id},
+    type: 'POST',
+    success: function(data) {
+      console.log(data);
+    },
+    error: function(data) {
+      alert('error updating purchase. Please refresh your browser');
+    }
+  });
+}
+
+  $(document).on('click', '.product input', function() {
 		if($(this).is(':checked')) {
-			$(".box1").addClass("reduce");
+			$(this).parents('.product').addClass("reduce");
+      updatePurchased($(this).data('id'), true);
 		} else {
-			$(".box1").removeClass("reduce");
+      $(this).parents('.product').removeClass("reduce");
+      updatePurchased($(this).data('id'), false);
 		}
 	});
 
-	$('#c2').change(function() {
-		if($(this).is(':checked')) {
-			$(".box2").addClass("reduce");
-		} else {
-			$(".box2").removeClass("reduce");
-		}
-	});
-
-	$('#c3').change(function() {
-		if($(this).is(':checked')) {
-			$(".box3").addClass("reduce");
-		} else {
-			$(".box3").removeClass("reduce");
-		}
-	});
-
-
-	$.get('//localhost:5050/projects/',function (projects) {
+	$.get('/projects/',function (projects) {
 		var source   = $("#hbs-project-template").html();
 		var template = Handlebars.compile(source);
 
@@ -34,4 +35,12 @@
 		$('.wrapper').append(projectListHTML);
 	});
 
+if (window.location.port === "18080") {
+  $('.name').html('ADAM');
+  $('body').addClass('adam');
+}
+if (window.location.port === "17070") {
+  $('.name').html('ANDREW');
+  $('body').addClass('andrew');
+}
 

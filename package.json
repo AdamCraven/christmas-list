@@ -1,26 +1,12 @@
 {
+  "private": true,
+  "engines": {
+    "node": ">=0.12.0"
+  },
   "name": "christmas-list",
   "version": "0.0.1",
   "description": "Christmas list for the family",
   "main": "app.js",
-  "dependencies": {
-    "normalize.css": "^3.0.3",
-    "body-parser": "^1.14.1",
-    "express": "^4.13.3",
-    "handlebars": "^4.0.5",
-    "jquery": "^2.1.4",
-    "lodash": "^3.10.1",
-    "method-override": "^2.3.5",
-    "sails-disk": "^0.10.8",
-    "shortid": "^2.2.4",
-    "waterline": "^0.10.27",
-    "waterline-fixtures": "^0.2.3"
-  },
-  "devDependencies": {
-    "gulp": "^3.9.0",
-    "gulp-sass": "^2.1.0",
-    "gulp-watch": "^4.3.5"
-  },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -33,5 +19,55 @@
   "bugs": {
     "url": "https://github.com/Ac02/christmas-list/issues"
   },
-  "homepage": "https://github.com/Ac02/christmas-list#readme"
+  "dependencies": {
+    "body-parser": "^1.14.1",
+    "connect-busboy": "0.0.2",
+    "express": "^4.13.3",
+    "fs-extra": "^0.26.2",
+    "handlebars": "^4.0.5",
+    "jquery": "^2.1.4",
+    "lodash": "^3.10.1",
+    "method-override": "^2.3.5",
+    "normalize.css": "^3.0.3",
+    "sails-disk": "^0.10.8",
+    "shortid": "^2.2.4",
+    "waterline": "^0.10.27",
+    "waterline-fixtures": "^0.2.3"
+  },
+  "devDependencies": {
+    "babel-core": "^5.5.6",
+    "browser-sync": "^2.2.1",
+    "del": "^1.1.1",
+    "gulp": "^3.9.0",
+    "gulp-autoprefixer": "^3.1.0",
+    "gulp-cache": "^0.2.8",
+    "gulp-eslint": "^0.13.2",
+    "gulp-if": "^1.2.5",
+    "gulp-imagemin": "^2.2.1",
+    "gulp-load-plugins": "^0.10.0",
+    "gulp-minify-css": "^1.1.1",
+    "gulp-minify-html": "^1.0.0",
+    "gulp-plumber": "^1.0.1",
+    "gulp-sass": "^2.0.0",
+    "gulp-size": "^1.2.1",
+    "gulp-sourcemaps": "^1.5.0",
+    "gulp-uglify": "^1.1.0",
+    "gulp-useref": "^1.1.1",
+    "gulp-watch": "^4.3.5",
+    "main-bower-files": "^2.5.0",
+    "opn": "^1.0.1",
+    "wiredep": "^2.2.2"
+  },
+  "eslintConfig": {
+    "env": {
+      "node": true,
+      "browser": true
+    },
+    "rules": {
+      "quotes": [
+        2,
+        "single"
+      ]
+    }
+  }
 }

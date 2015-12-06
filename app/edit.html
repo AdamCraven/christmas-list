@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8" />
+  <title>Christmas Form</title>
+  <link rel="stylesheet" href="../node_modules/normalize.css/normalize.css">
+  <link rel="stylesheet" href="styles/main.css">
+</head>
+<body class="edit">
+	<form enctype="multipart/form-data" method="post" >
+		<input value="" required type="text" name="name" placeholder="title">
+		<input value="" type="text" name="description" placeholder="description">
+		<input value="" required type="number" name="price" placeholder="price">
+		<input value="" required type="file" name="backgroundImage" placeholder="background image">
+		<input value="" required type="text" name="link" placeholder="link">
+    <label class="purch">Purchased?
+      <input type="checkbox" name="purchased" >
+    </label>
+		<input type="submit" class="create">
+	</form>
+
+  <div class="wrapper">
+
+  </div>
+
+  <script id="hbs-project-template" type="text/x-handlebars-template">
+  <form enctype="multipart/form-data" id={{id}} >
+  <h1>{{purchased}}</h1>
+    <input type="hidden" name="id" value="{{id}}">
+    <input value="{{name}}" required type="text" name="name" placeholder="title">
+    <input value="{{description}}" type="text" name="description" placeholder="description">
+    <input value="{{price}}" required type="number" name="price" placeholder="price">
+    <input value="{{image}}" required type="file" name="backgroundImage" placeholder="background image">
+    <input value="{{link}}" required type="text" name="link" placeholder="link">
+    <label class="purch">Purchased?
+      <input type="checkbox" class="purchased" name="purchased" {{#if purchased}}checked{{/if}} >
+    </label>
+    <select name="owner">
+      <option value="adam">Adam</option>
+      <option value="andrew">Andrew</option>
+    </select>
+
+    <button class="update">update</button>
+    <button class="delete">delete</button>
+  </form>
+  </script>
+  <script src="../node_modules/jquery/dist/jquery.js"></script>
+  <script src="../node_modules/handlebars/dist/handlebars.js"></script>
+  <script src="submit.js"></script>
+
+</body>
+</html>

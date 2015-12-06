@@ -38,7 +38,7 @@ var config = {
   defaults: {
     migrate: 'alter'
   },
-  fixtures: [
+ /* fixtures: [
     {
         model: 'projects',
         items: [
@@ -47,7 +47,7 @@ var config = {
             { name: 'Ren' }
         ]
     }
-],
+  ],*/
 };
 
 
@@ -63,6 +63,11 @@ orm.loadCollection(Project);
 // EXPRESS SETUP
 
 
+var busboy = require('connect-busboy'); //middleware for form/file upload
+var path = require('path');     //used for file path
+var fs = require('fs-extra');       //File System - for file manipulation
+
+
 // Setup Express Application
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
@@ -71,16 +76,119 @@ app.use(function(req, res, next) {
   res.header("Access-Control-Allow-Headers", "X-Requested-With");
   next();
 });
+app.use(busboy());
 app.use(methodOverride());
 
 // Build Express Routes (CRUD routes for /Projects)
 
+
+/**
+ * Web server routes
+ */
+app.get('/', function(req,res) {
+  res.sendFile('app/index.html',{ root: __dirname });
+});
+
+app.get(/node_modules\/(.+)$/, function(req, res) {
+  console.log(req.params[0]);
+  res.sendFile('/node_modules/' + req.params[0], { root: __dirname });
+});
+app.get(/^(.+[js|css|html])$/, function(req, res) {
+  res.sendFile('app/' + req.params[0], {root: __dirname});
+});
+
+app.get(/cdn\/(.+)$/, function(req,res) {
+  res.sendFile('uploads/img/' + req.params[0], {root: __dirname});
+});
+
+/**
+ * Application server routes
+ */
 app.get('/projects', function(req, res) {
   app.models.project.find().exec(function(err, models) {
     if(err) return res.json({ err: err }, 500);
     res.json(models);
   });
 });
+
+app.post('/upload', createOrUpdate.bind(null, true));
+
+function createOrUpdate(isNew, req, res, next) {
+  var modelObj = {};
+  var fstream;
+  req.pipe(req.busboy);
+
+  //read https://www.npmjs.com/package/busboy
+  req.busboy.on('field', function(fieldname, val, fieldnameTruncated, valTruncated, encoding, mimetype) {
+    console.log('[' + fieldname + ']:' + val);
+    if(fieldname === 'purchased') {
+      if (val === 'on') {
+        val = true;
+      }
+      else {
+        val = false;
+      }
+    }
+    modelObj[fieldname] = val;
+  });
+
+  req.busboy.on('file', function(fieldname, file, filename) {
+    if (!filename) {
+      return true;
+    }
+    console.log("Uploading: " + filename);
+
+    var sanitizedFilename = filename.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+    modelObj.image = sanitizedFilename;
+    file.pipe(fs.createOutputStream(__dirname + '/uploads/img/' + sanitizedFilename));
+  });
+
+  req.busboy.on('finish', function() {
+    if (isNew) {
+      app.models.project.create(modelObj, function(err, model) {
+        console.log('REQ.body', modelObj);
+        console.log('MODEL', model);
+        if (err) {
+          return res.json({
+            err: err
+          }, 500);
+        }
+        res.json({
+          success: true
+        }); //where to go next
+      });
+    } else {
+      app.models.project.update(modelObj.id, modelObj, function(err, model) {
+        console.log('REQ.body', modelObj);
+        console.log('MODEL', model);
+        if (err) {
+          return res.json({
+            err: err
+          }, 500);
+        }
+        res.json({
+          success: true
+        }); //where to go next
+      });
+    }
+  });
+}
+
+app.post('/upload/:id', createOrUpdate.bind(null, false));
+app.post('/purchased/:id', function(req, res) {
+  console.log(req.body, 'body');
+  if(!req.body.id) {
+    return res.json({success:false});
+  }
+  var purchased = (req.body.purchased === 'true') ? true : false;
+  console.log('UPDATE TO', !!req.body.purchased);
+  app.models.project.update(req.body.id, {purchased: purchased}, function(err, model) {
+    if(err) return res.json({ err: err }, 500);
+    res.json(model);
+  });
+});
+
 
 app.post('/projects', function(req, res) {
   app.models.project.create(req.body, function(err, model) {
@@ -127,18 +235,13 @@ orm.initialize(config, function(err, models) {
     // Load fixtures
   waterlineFixtures.init({
     collections: models.collections,
-    fixtures: [{
-        model:"project",
-        items: [
-            { name: 'Guinness' },
-            { name: 'Sully' },
-            { name: 'Ren' }
-        ]
-    }]
+
   }, function doThisAfterFixturesAreLoaded(err) {
       // Start Server
-      app.listen(5050);
-      console.log("To see saved Projects, visit http://localhost:3000/Projects");
+      var port = process.argv[2] || 18080;
+      console.log(process.argv[2]);
+      app.listen(process.argv[2]);
+      console.log("Server running on "+ port);
   });
 
 });
