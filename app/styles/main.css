@@ -17,9 +17,6 @@ body.home .wrapper {
   -webkit-align-items: center;
       -ms-flex-align: center;
           align-items: center;
-  -webkit-justify-content: center;
-      -ms-flex-pack: center;
-          justify-content: center;
   -webkit-flex-direction: row;
       -ms-flex-direction: row;
           flex-direction: row;
@@ -29,6 +26,13 @@ body.home .wrapper {
   -webkit-align-content: flex-end;
       -ms-flex-line-pack: end;
           align-content: flex-end; }
+
+body.home .header {
+  margin: 0 auto;
+  width: 500px; }
+  body.home .header h1 {
+    color: white;
+    span-font-size: 200%; }
 
 .product {
   -webkit-flex: 1;
@@ -41,7 +45,7 @@ body.home .wrapper {
   background-size: 240px 240px;
   background-repeat: no-repeat;
   background-size: cover;
-  margin: 5px 10px 5px 10px;
+  margin: 5px 10px 65px 10px;
   position: relative;
   -webkit-flex-basis: 230px;
       -ms-flex-preferred-size: 230px;
@@ -126,3 +130,9 @@ body.home .wrapper {
 
 body {
   background: linear-gradient(to right, #b6c8b6, #34324c); }
+
+body.adam, body.adam .price {
+  background: #3F16FF; }
+
+body.andrew, body.andrew .price {
+  background: #46EA3F; }

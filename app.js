@@ -113,8 +113,6 @@ app.get('/projects', function(req, res) {
 
 app.post('/upload', createOrUpdate.bind(null, true));
 
-
-
 function createOrUpdate(isNew, req, res, next) {
   var modelObj = {};
   var fstream;
@@ -175,19 +173,17 @@ function createOrUpdate(isNew, req, res, next) {
       });
     }
   });
-
 }
-
-
 
 app.post('/upload/:id', createOrUpdate.bind(null, false));
 app.post('/purchased/:id', function(req, res) {
+  console.log(req.body, 'body');
   if(!req.body.id) {
-    res.json({success:false});
+    return res.json({success:false});
   }
-
-  var isChecked = (req.body.purchased === 'on') ? true : false;
-  app.models.project.update(req.body.id, {purchased: isChecked}, function(err, model) {
+  var purchased = (req.body.purchased === 'true') ? true : false;
+  console.log('UPDATE TO', !!req.body.purchased);
+  app.models.project.update(req.body.id, {purchased: purchased}, function(err, model) {
     if(err) return res.json({ err: err }, 500);
     res.json(model);
   });
@@ -242,8 +238,10 @@ orm.initialize(config, function(err, models) {
 
   }, function doThisAfterFixturesAreLoaded(err) {
       // Start Server
-      app.listen(5050);
-      console.log("To see saved Projects, visit http://localhost:3000/Projects");
+      var port = process.argv[2] || 18080;
+      console.log(process.argv[2]);
+      app.listen(process.argv[2]);
+      console.log("Server running on "+ port);
   });
 
 });

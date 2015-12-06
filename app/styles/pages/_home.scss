@@ -2,9 +2,20 @@ body.home {
   .wrapper {
     display: flex;
     align-items: center;
-    justify-content: center;
     flex-direction: row;
     flex-wrap: wrap;
     align-content: flex-end;
+  }
+  .header {
+    margin: 0 auto;
+    width: 500px;
+
+    h1 {
+      color: white;
+
+      span: {
+        font-size: 200%;
+      }
+    }
   }
 }

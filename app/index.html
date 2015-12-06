@@ -9,23 +9,23 @@
 </head>
 <body class="home">
 	<div class="header">
-		<h1>The Christmas Wish List</h1>
+		<h1><span class="name"></span>'s  Christmas Wish List</h1>
 	</div>
 
-	<h2>Adam's Wish List:</h2>
 
 	<div class="wrapper">
   <script id="hbs-project-template" type="text/x-handlebars-template">
-  	<div class="product" style="background-image:url('/cdn/{{image}}')">
-  		<h3 class="title">{{name}}</h3>
-  		<p class="price">{{price}}</p>
+  	<div class="product {{#if purchased}}reduce{{/if}}" style="background-image:url('/cdn/{{image}}')">
+  		<a href="{{link}}" target="_blank">
+      <h3 class="title">{{name}}</h3>
+  		<p class="price">£{{price}}</p>
   		<div class="description">
   			<p>{{description}}</p>
   		</div>
+      </a>
   		<div class="footer">
-  			<a href="{{link}}" class="link">Link</a>
   			<label class="purch">Purchased?
-  				<input type="checkbox" class="checkbox" id="c1"/>
+  				<input type="checkbox" class="checkbox" data-id="{{id}}" {{#if purchased}}checked{{/if}} />
   			</label>
   		</div>
   	</div>

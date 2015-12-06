@@ -34,7 +34,6 @@ function submit(e) {
   var id = $form.find('input[name="id"]').val();
   var url = (id) ? 'upload/' + id : '/upload';
 
-
   $.ajax({
     url: url,
     data: new FormData($form[0]),
@@ -42,10 +41,10 @@ function submit(e) {
     contentType: false,
     type: 'POST',
     success: function(data) {
-      alert(JSON.stringify(data));
+      console.log(data);
     },
     error: function(data) {
-      alert(JSON.stringify(data));
+      alert('fail', JSON.stringify(data));
     }
   });
 }

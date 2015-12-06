@@ -6,3 +6,10 @@
 body {
 	background: linear-gradient(to right, #b6c8b6, #34324c);
 }
+
+body.adam, body.adam .price {
+  background:#3F16FF;
+}
+body.andrew, body.andrew .price {
+  background:#46EA3F;
+}
