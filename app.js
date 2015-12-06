@@ -2,23 +2,30 @@
  * A simple example of how to use Waterline v0.10 with Express
  */
 
-var express = require('express'),
-    _ = require('lodash'),
-    app = express(),
-    Waterline = require('waterline'),
-    bodyParser = require('body-parser'),
-    methodOverride = require('method-override');
+var express = require('express');
+var _ = require('lodash');
+var app = express();
+var Waterline = require('waterline');
+var bodyParser = require('body-parser');
+var methodOverride = require('method-override');
 var waterlineFixtures = require('waterline-fixtures');
+var program = require('commander');
+var diskAdapter = require('sails-disk');
+var busboy = require('connect-busboy'); //middleware for form/file upload
+var path = require('path');     //used for file path
+var fs = require('fs-extra');       //File System - for file manipulation
+var Project = require('./server/models/project');
 
-var orm = new Waterline();
 
+program
+  .version('1.0.0')
+  .option('-p --port <n>', 'Starting port')
+  .parse(process.argv);
 
 // WATERLINE CONFIG
-
+var orm = new Waterline();
 
 // Require any waterline compatible adapters here
-var diskAdapter = require('sails-disk');
-
 // Build A Config Object
 var config = {
   // Setup Adapters
@@ -51,21 +58,11 @@ var config = {
 };
 
 
-
-
-var Project = require('./server/models/project');
-
 // Load the Models into the ORM
 orm.loadCollection(Project);
 
 
-
 // EXPRESS SETUP
-
-
-var busboy = require('connect-busboy'); //middleware for form/file upload
-var path = require('path');     //used for file path
-var fs = require('fs-extra');       //File System - for file manipulation
 
 
 // Setup Express Application
@@ -135,7 +132,6 @@ function createOrUpdate(isNew, req, res, next) {
     console.log("Uploading: " + filename);
 
     var sanitizedFilename = filename.replace(/[^a-z0-9]/gi, '_').toLowerCase();
-
     modelObj.image = sanitizedFilename;
     file.pipe(fs.createOutputStream(__dirname + '/uploads/img/' + sanitizedFilename));
   });
@@ -234,9 +230,8 @@ orm.initialize(config, function(err, models) {
   waterlineFixtures.init({
     collections: models.collections,
   }, function doThisAfterFixturesAreLoaded(err) {
-      var port = process.argv[2] || 18080;
+      var port =program.port || 18080;
       app.listen(port);
       console.log("Server running on "+ port);
   });
-
 });
