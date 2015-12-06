@@ -7,6 +7,7 @@
   <link rel="stylesheet" href="styles/main.css">
 </head>
 <body class="edit">
+<h1>CREATE new product</h1>
 	<form enctype="multipart/form-data" method="post" >
 		<input value="" required type="text" name="name" placeholder="title">
 		<input value="" type="text" name="description" placeholder="description">
@@ -19,29 +20,27 @@
 		<input type="submit" class="create">
 	</form>
 
+<h1>Edit product (note if you do this, you will always need the original image)</h1>
   <div class="wrapper">
 
   </div>
 
   <script id="hbs-project-template" type="text/x-handlebars-template">
-  <form enctype="multipart/form-data" id={{id}} >
-  <h1>{{purchased}}</h1>
+  <form enctype="multipart/form-data" id={{id}}>
     <input type="hidden" name="id" value="{{id}}">
-    <input value="{{name}}" required type="text" name="name" placeholder="title">
+    <input value="{{name}}" required type="text" name="name" placeholder="title"> *
     <input value="{{description}}" type="text" name="description" placeholder="description">
-    <input value="{{price}}" required type="number" name="price" placeholder="price">
-    <input value="{{image}}" required type="file" name="backgroundImage" placeholder="background image">
-    <input value="{{link}}" required type="text" name="link" placeholder="link">
+    <input value="{{price}}" required type="number" name="price" placeholder="price"> *
+    <input value="{{image}}" required type="file" name="backgroundImage" placeholder="background image"> *
+    <input value="{{link}}" required type="text" name="link" placeholder="link"> *
     <label class="purch">Purchased?
       <input type="checkbox" class="purchased" name="purchased" {{#if purchased}}checked{{/if}} >
     </label>
-    <select name="owner">
-      <option value="adam">Adam</option>
-      <option value="andrew">Andrew</option>
-    </select>
 
     <button class="update">update</button>
     <button class="delete">delete</button>
+    <input type="submit" style="display: none">
+
   </form>
   </script>
   <script src="../node_modules/jquery/dist/jquery.js"></script>

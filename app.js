@@ -90,7 +90,6 @@ app.get('/', function(req,res) {
 });
 
 app.get(/node_modules\/(.+)$/, function(req, res) {
-  console.log(req.params[0]);
   res.sendFile('/node_modules/' + req.params[0], { root: __dirname });
 });
 app.get(/^(.+[js|css|html])$/, function(req, res) {
@@ -133,9 +132,6 @@ function createOrUpdate(isNew, req, res, next) {
   });
 
   req.busboy.on('file', function(fieldname, file, filename) {
-    if (!filename) {
-      return true;
-    }
     console.log("Uploading: " + filename);
 
     var sanitizedFilename = filename.replace(/[^a-z0-9]/gi, '_').toLowerCase();
@@ -149,6 +145,7 @@ function createOrUpdate(isNew, req, res, next) {
       app.models.project.create(modelObj, function(err, model) {
         console.log('REQ.body', modelObj);
         console.log('MODEL', model);
+        console.log('error', err);
         if (err) {
           return res.json({
             err: err
@@ -162,6 +159,7 @@ function createOrUpdate(isNew, req, res, next) {
       app.models.project.update(modelObj.id, modelObj, function(err, model) {
         console.log('REQ.body', modelObj);
         console.log('MODEL', model);
+
         if (err) {
           return res.json({
             err: err

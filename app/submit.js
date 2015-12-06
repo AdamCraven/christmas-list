@@ -31,7 +31,14 @@ function remove(e) {
 function submit(e) {
   e.preventDefault();
   var $form = $(e.target).parent('form');
+
+  $form.find('submit').click();
+
   var id = $form.find('input[name="id"]').val();
+  var file = $form.find('input[type="file"]').val();
+  if(!file) {
+    $form.find('input[type="file"]').attr('disabled', true);
+  }
   var url = (id) ? 'upload/' + id : '/upload';
 
   $.ajax({
@@ -42,9 +49,12 @@ function submit(e) {
     type: 'POST',
     success: function(data) {
       console.log(data);
+      $form.find('input[type="file"]').attr('disabled', false);
+
     },
     error: function(data) {
       alert('fail', JSON.stringify(data));
+      $form.find('input[type="file"]').attr('disabled', false);
     }
   });
 }
