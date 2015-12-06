@@ -233,12 +233,9 @@ orm.initialize(config, function(err, models) {
     // Load fixtures
   waterlineFixtures.init({
     collections: models.collections,
-
   }, function doThisAfterFixturesAreLoaded(err) {
-      // Start Server
       var port = process.argv[2] || 18080;
-      console.log(process.argv[2]);
-      app.listen(process.argv[2]);
+      app.listen(port);
       console.log("Server running on "+ port);
   });
 
