@@ -44,3 +44,4 @@ if (window.location.port === "17070") {
   $('body').addClass('andrew');
 }
 
+$('body').bind('touchstart', function() {});
