@@ -13,7 +13,7 @@ $.get('/projects/', function(projects) {
 function remove(e) {
   e.preventDefault();
   var $form = $(e.target).parent('form');
-  var id = $form[0].id;
+  var id = $form.find('input[name="id"]').val();
 
   $.ajax({
     type: "DELETE",
