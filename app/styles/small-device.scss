@@ -1,18 +1,20 @@
 h1 {
-	margin: 20px 30px 0px 30px;
+  margin: 20px 30px 0px 30px;
 }
 .product {
-	height: 440px;
-	min-width: 440px;
-	max-width: 440px;
-	margin: 40px 30px 110px 30px;
+  height: 440px;
+  min-width: 440px;
+  max-width: 440px;
+  margin: 40px 30px 110px 30px;
 
-	.description {
-		position: relative;
-		top: 440px;
-		padding: 5px;
-		font-size: 24px;
-		opacity: 1; 
-	}	
+  .description {
+    position: relative;
+    top: 440px;
+    padding: 5px;
+    font-size: 24px;
+    opacity: 1;
+  }
+  input.checkbox {
+    transform: scale(2);
+  }
 }
-

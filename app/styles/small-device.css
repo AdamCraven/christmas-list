@@ -12,3 +12,6 @@ h1 {
     padding: 5px;
     font-size: 24px;
     opacity: 1; }
+  .product input.checkbox {
+    -webkit-transform: scale(2);
+            transform: scale(2); }
