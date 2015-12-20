@@ -131,7 +131,7 @@ function createOrUpdate(isNew, req, res, next) {
   req.busboy.on('file', function(fieldname, file, filename) {
     console.log("Uploading: " + filename);
 
-    var sanitizedFilename = filename.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+    var sanitizedFilename = filename.replace(/[^a-z0-9.]/gi, '_').toLowerCase();
     modelObj.image = sanitizedFilename;
     file.pipe(fs.createOutputStream(__dirname + '/uploads/img/' + sanitizedFilename));
   });
